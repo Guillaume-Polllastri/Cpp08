@@ -6,11 +6,11 @@
 #    By: gpollast <gpollast@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/12/18 11:36:06 by gpollast          #+#    #+#              #
-#    Updated: 2026/02/26 18:07:16 by gpollast         ###   ########.fr        #
+#    Updated: 2026/03/13 11:07:53 by gpollast         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = ex01
+NAME = ex02
 
 SRCS =	srcs/main.cpp \
 
