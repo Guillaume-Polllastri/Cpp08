@@ -6,12 +6,13 @@
 /*   By: gpollast <gpollast@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/25 15:51:24 by gpollast          #+#    #+#             */
-/*   Updated: 2026/02/26 15:45:32 by gpollast         ###   ########.fr       */
+/*   Updated: 2026/03/18 17:37:14 by gpollast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
 #include <iostream>
+#include <climits>
 
 void	test1()
 {
@@ -25,6 +26,29 @@ void	test1()
 		sp.addNumber(17);
 		sp.addNumber(9);
 		sp.addNumber(11);
+		sp.printContainer();
+		std::cout << "ShortestSpan: " << sp.shortestSpan() << std::endl;
+		std::cout << "LongestSpan: " << sp.longestSpan() << std::endl;
+	}
+	catch (std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+	std::cout << "********************************************************************************" << std::endl << std::endl;
+}
+
+void	testIntMax()
+{
+	std::cout << "********************************************************************************" << std::endl;
+	try
+	{
+		Span sp = Span(5);
+		
+		sp.addNumber(6);
+		sp.addNumber(7);
+		sp.addNumber(17);
+		sp.addNumber(INT_MIN);
+		sp.addNumber(INT_MAX);
 		sp.printContainer();
 		std::cout << "ShortestSpan: " << sp.shortestSpan() << std::endl;
 		std::cout << "LongestSpan: " << sp.longestSpan() << std::endl;
@@ -87,6 +111,30 @@ void	testRangeIterator()
 		Span sp = Span(5);
 		std::vector<int>	vec;
 
+		for (int i = 0; i < 5; i++)
+		{
+			vec.push_back(i + 1);
+		}
+		sp.addNumber(vec.begin(), vec.end());
+		sp.printContainer();
+		std::cout << "ShortestSpan: " << sp.shortestSpan() << std::endl;
+		std::cout << "LongestSpan: " << sp.longestSpan() << std::endl;
+	}
+	catch (std::exception& e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+	std::cout << "********************************************************************************" << std::endl << std::endl;
+}
+
+void	testRangeIteratorOverflow()
+{
+	std::cout << "********************************************************************************" << std::endl;
+	try
+	{
+		Span sp = Span(5);
+		std::vector<int>	vec;
+
 		for (int i = 0; i < 10000; i++)
 		{
 			vec.push_back(i + 1);
@@ -106,8 +154,10 @@ void	testRangeIterator()
 int	main(void)
 {
 	test1();
+	testIntMax();
 	testContainerOverflow();
 	testContainerIsNotFullEnough();
-	// testRangeIterator();
+	testRangeIterator();
+	testRangeIteratorOverflow();
 	return (0);
 }

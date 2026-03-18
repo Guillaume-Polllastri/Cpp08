@@ -6,7 +6,7 @@
 /*   By: gpollast <gpollast@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 10:15:26 by gpollast          #+#    #+#             */
-/*   Updated: 2026/02/26 15:32:52 by gpollast         ###   ########.fr       */
+/*   Updated: 2026/03/18 17:29:59 by gpollast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,14 @@ class Span {
 		void	addNumber(int value);
 		template< typename RangeIterator>
 		void	addNumber(RangeIterator begin, RangeIterator end) {
-			for (RangeIterator it = begin; it != end; it++)
-				_container.push_back(*it);
+			if ((std::distance(begin, end) + _container.size()) > _N)
+				throw ContainerIsFull();
+			_container.insert(_container.end(), begin, end);
 		}
-		int		shortestSpan();
-		int		longestSpan();
-		void	printContainer();
+		
+		unsigned int		shortestSpan();
+		unsigned int		longestSpan();
+		void				printContainer();
 
 		class ContainerIsFull: public std::exception
 		{

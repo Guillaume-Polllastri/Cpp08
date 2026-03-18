@@ -6,13 +6,15 @@
 /*   By: gpollast <gpollast@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/02/26 10:15:35 by gpollast          #+#    #+#             */
-/*   Updated: 2026/03/11 18:37:45 by gpollast         ###   ########.fr       */
+/*   Updated: 2026/03/18 17:34:53 by gpollast         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Span.hpp"
 #include <algorithm>
 #include <iostream>
+#include <cstdlib>
+#include <cmath>
 
 /* ************************************************************************** */
 
@@ -43,7 +45,7 @@ void	Span::addNumber(int value) {
 	_container.push_back(value);
 }
 
-int	Span::shortestSpan() {
+unsigned int	Span::shortestSpan() {
 	if (_container.size() <= 1)
 		throw ContainerIsNotFullEnough();
 
@@ -51,18 +53,18 @@ int	Span::shortestSpan() {
 	std::sort(copy.begin(), copy.end());
 	
 	std::vector<int>::iterator	it;
-	int	result = copy[1] - copy[0];
+	int	result = std::abs(copy[1] - copy[0]);
 	for (it = copy.begin(); (it + 1) != copy.end(); it++)
 	{
-		if ((*(it + 1) - *it) < result)
+		if (std::abs((*(it + 1) - *it)) < result)
 		{
-			result = *(it + 1) - *it;
+			result = std::abs(*(it + 1) - *it);
 		}
 	}
 	return (result);
 }
 
-int	Span::longestSpan() {
+unsigned int	Span::longestSpan() {
 	if (_container.size() <= 1)
 		throw ContainerIsNotFullEnough();
 	return (*std::max_element(_container.begin(), _container.end()) - *std::min_element(_container.begin(), _container.end()));
